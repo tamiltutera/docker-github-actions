@@ -25,3 +25,12 @@ EXPOSE 8001
 
 CMD ["python","manage.py","runserver","0.0.0.0:8000"]
 
+FROM mysql:latest
+
+ENV DB_HOST=$DB_HOST \
+      MYSQL_DATABASE=$MYSQL_DATABASE \
+      MYSQL_USER=$MYSQL_USER \
+      MYSQL_PASSWORD=$MYSQL_PASSWORD \
+      MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+ COPY my_sql.cnf /etc/mysql/conf.d/my_sql.cnf
+ 
