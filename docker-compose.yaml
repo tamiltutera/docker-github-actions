@@ -1,38 +1,36 @@
 version: '3'
-
 services:
-  db:
-    image: mysql:latest
-    container_name: django_db
-    environment:
-      DB_HOST: db
-      MYSQL_DATABASE: sample_db
-      MYSQL_USER: sample_user
-      MYSQL_PASSWORD: sample_password
-      MYSQL_ROOT_PASSWORD: sample123
-    restart: always
-    ports:
-      - 3306:3306
   
   app:
-    build:
+    build: 
       context: .
       dockerfile: Dockerfile
-    container_name: django_app
-    image: django:app
-    environment:
-      DB_HOST: db
-      MYSQL_DATABASE: sample_db
-      MYSQL_USER: sample_user
-      MYSQL_PASSWORD: sample_password
-      MYSQL_ROOT_PASSWORD: sample123
+      args:
+        - DB_HOST=db
+        - DB_PORT=$DB_PORT
+        - APP_PORT=$APP_PORT
+        - MYSQL_DATABASE=$MYSQL_DATABASE
+        - MYSQL_USER=$MYSQL_USER
+        - MYSQL_PASSWORD=$MYSQL_PASSWORD
+        - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+    image: app:django
+    container_name: web_app
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      
+      - .:/code      
     ports:
-      - 8001:8000
+      - $APP_PORT:8000    
     depends_on:
       - db
-    links:
-      - db
-      
+
+  db:
+    image: mysql:5.7
+    container_name: db
+    env_file:
+      - ./.env   
+    restart: always   
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - $DB_PORT:3306    
+
+volumes:
+  mysql_data:
