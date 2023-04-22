@@ -1,0 +1,6 @@
+Django
+sqlparse
+pytz
+asgiref
+mysqlclient
+psycopg2-binary
