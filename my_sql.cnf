@@ -1,7 +1,7 @@
 [mysqld]
 datadir=/var/lib/mysql
 socket=/var/run/mysqld/mysqld.sock
-user=mysql
+user=mysql_user
 # Disallow remote connections for security reasons
 bind-address=127.0.0.1
 # Character set and collation
