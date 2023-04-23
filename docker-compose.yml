@@ -13,7 +13,7 @@ services:
         - MYSQL_USER=$MYSQL_USER
         - MYSQL_PASSWORD=$MYSQL_PASSWORD
         - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
-    image: app:django
+    image: django_mysql_app
     container_name: web_app
     volumes:
       - .:/code      
