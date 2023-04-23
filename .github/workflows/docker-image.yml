@@ -18,16 +18,16 @@ jobs:
     #  run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
     - name: Start containers
       run: docker-compose -f "docker-compose.yml" up -d --build
-#     - name: Login to Quay.io
-#       uses: docker/login-action@v1
-#       with:
-#         registry: quay.io
-#         username: ${{ secrets.QUAY_USERNAME }}
-#         password: ${{ secrets.QUAY_PASSWORD }}
+    - name: Login to Quay.io
+      uses: docker/login-action@v1
+      with:
+        registry: quay.io
+        username: ${{ secrets.QUAY_USERNAME }}
+        password: ${{ secrets.QUAY_PASSWORD }}
 
-#     - name: Build and Push Docker image
-#       uses: docker/build-push-action@v2
-#       with:
-#         context: .
-#         push: true
-#         tags: quay.io/${{ secrets.QUAY_ORG }}/${{ secrets.QUAY_REPO }}:latest
+    - name: Build and Push Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: true
+        tags: quay.io/${{ secrets.QUAY_ORG }}/${{ secrets.QUAY_REPO }}:1.0
