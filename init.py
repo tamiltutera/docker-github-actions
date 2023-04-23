@@ -17,11 +17,14 @@ with open('.env', 'r') as f:
     for line in f:
         key, value = line.strip().split('=')
         env_vars[key] = value
+# Define port to expose
+port_bindings = {8080: 8080}
 
 # Run container with environment variables
 container = client.containers.run(
     image_name + ':' + image_tag,
     environment=env_vars,
+    ports=port_bindings,
     detach=True
 )
 
