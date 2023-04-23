@@ -29,7 +29,7 @@ jobs:
     - name: Build and push Docker images
       run: |
         docker-compose build
-        docker tag ${{ secrets.QUAY_REPO }} quay.io/${{ secrets.QUAY_ORG }}/${{ secrets.QUAY_REPO }}:latest
+        docker tag docker_mysql_app quay.io/${{ secrets.QUAY_ORG }}/${{ secrets.QUAY_REPO }}:latest
         docker push quay.io/${{ secrets.QUAY_ORG }}/${{ secrets.QUAY_REPO }}:latest
 #     - name: Build and Push Docker image
 #       uses: docker/build-push-action@v2
