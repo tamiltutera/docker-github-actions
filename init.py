@@ -23,6 +23,7 @@ port_bindings = {8000: 8001}
 # Run container with environment variables
 container = client.containers.run(
     image_name + ':' + image_tag,
+    name='djang_web_app'
     environment=env_vars,
     ports=port_bindings,
     detach=True
