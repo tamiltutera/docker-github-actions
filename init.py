@@ -18,7 +18,7 @@ with open('.env', 'r') as f:
         key, value = line.strip().split('=')
         env_vars[key] = value
 # Define port to expose
-port_bindings = {8001: 8000}
+port_bindings = {8000: 8001}
 
 # Run container with environment variables
 container = client.containers.run(
