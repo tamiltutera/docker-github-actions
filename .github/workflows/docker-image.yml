@@ -45,14 +45,18 @@ jobs:
 #         push: true
 #         tags: quay.io/${{ secrets.QUAY_ORG }}/${{ secrets.QUAY_REPO }}:latest
     
-    - name: Build and push MySQL image
+    # - name: Build and push MySQL image
+    #   run: |
+    #     docker build -f mysql.Dockerfile -t quay.io/${{ secrets.QUAY_ORG }}/pure_db:latest .
+    #     docker push quay.io/${{ secrets.QUAY_ORG }}/pure_db:latest
+    # - name: Build and push Django image
+    #   run: |
+    #     docker build -f django.Dockerfile -t quay.io/${{ secrets.QUAY_ORG }}/pure_web_app:latest .
+    #     docker push quay.io/${{ secrets.QUAY_ORG }}/pure_web_app:latest
+    - name: Build and Push Docker Images
       run: |
-        docker build -f mysql.Dockerfile -t quay.io/${{ secrets.QUAY_ORG }}/pure_db:latest .
-        docker push quay.io/${{ secrets.QUAY_ORG }}/pure_db:latest
-    - name: Build and push Django image
-      run: |
-        docker build -f django.Dockerfile -t quay.io/${{ secrets.QUAY_ORG }}/pure_web_app:latest .
-        docker push quay.io/${{ secrets.QUAY_ORG }}/pure_web_app:latest
+        docker-compose build
+        docker-compose push
         
 #     - name: Build and Push Docker image
 #       uses: docker/build-push-action@v2

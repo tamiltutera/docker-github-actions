@@ -40,9 +40,8 @@ client = docker.from_env()
 
 # Define image names and tags
 image_tags = {
-    'image1': 'quay.io/tamiltutera/image1:latest',
-    'image2': 'quay.io/tamiltutera/image2:latest',
-    'image3': 'quay.io/tamiltutera/image3:latest',
+    'pure_db': 'quay.io/tamiltutera/pure_db:latest',
+    'pure_web_app': 'quay.io/tamiltutera/pure_web_app:latest'
 }
 
 # Pull images
