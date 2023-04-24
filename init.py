@@ -1,4 +1,4 @@
-# import docker
+import docker
 # import os
 
 # # Set up Docker client
@@ -32,7 +32,7 @@
 # # Print container ID
 # print('Container ID:', container.id)
 
-import docker
+# import docker
 import os
 
 # Set up Docker client
@@ -40,12 +40,13 @@ client = docker.from_env()
 
 # Define image names and tags
 image_tags = {
-    'pure_db': 'quay.io/tamiltutera/django_mysql:latest',
-    'pure_web_app': 'quay.io/tamiltutera/django_web_app:latest'
+    'pure_db': 'quay.io/tamiltutera/django_mysql',
+    'pure_web_app': 'quay.io/tamiltutera/django_web_app'
 }
 
 # Pull images
 for image_name, image_tag in image_tags.items():
+    
     client.images.pull(image_tag)
 
 # Set up environment variables from .env file

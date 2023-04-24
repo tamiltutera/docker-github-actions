@@ -14,7 +14,7 @@ services:
         - MYSQL_PASSWORD=$MYSQL_PASSWORD
         - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
         - MYSQL_ALLOW_ROOT_PASSWORD=$MYSQL_ALLOW_ROOT_PASSWORD
-    image: quay.io/tamiltutera/django_web_app:pure_web_app
+    image: quay.io/tamiltutera/django_web_app:latest
     container_name: web_app
     volumes:
       - .:/code      
@@ -27,7 +27,7 @@ services:
     build: 
       context: .
       dockerfile: mysql.Dockerfile
-    image: quay.io/tamiltutera/django_mysql:pure_db
+    image: quay.io/tamiltutera/django_mysql:latest
     container_name: db
     env_file:
       - ./.env   
