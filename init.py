@@ -44,6 +44,12 @@ image_tags = {
     'pure_web_app': 'quay.io/tamiltutera/django_web_app:latest'
 }
 
+# Define port bindings
+port_bindings = {
+    'pure_db': {3306: 3306},
+    'pure_web_app': {8000:8001}  # no ports to bind for this image
+}
+
 # Pull images
 for image_name, image_tag in image_tags.items():
     
@@ -59,11 +65,20 @@ with open('.env', 'r') as f:
 # Run containers with environment variables
 containers = {}
 for image_name, image_tag in image_tags.items():
-    container = client.containers.run(
-        image_tag,
-        environment=env_vars,
-        detach=True
-    )
+    if image_name in port_bindings:
+        container = client.containers.run(
+            image_tag,
+            environment=env_vars,
+            ports=port_bindings[image_name],
+            detach=True
+        )
+    else:
+        container = client.containers.run(
+            image_tag,
+            environment=env_vars,
+            detach=True
+        )
+    containers[image_name] = container
     containers[image_name] = container
 
 # Print container IDs
