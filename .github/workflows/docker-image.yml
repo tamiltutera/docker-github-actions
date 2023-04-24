@@ -47,8 +47,8 @@ jobs:
     
     - name: Build and push MySQL image
       run: |
-        docker build -f mysql.Dockerfile -t quay.io/${{ env.QUAY_IO_USERNAME }}/pure_db:latest .
-        docker push quay.io/${{ secrets.QUAY_USERNAME }}/pure_db:latest
+        docker build -f mysql.Dockerfile -t quay.io/${{ secrets.QUAY_ORG }}/pure_db:latest .
+        docker push quay.io/${{ secrets.QUAY_ORG }}/pure_db:latest
     - name: Build and push Django image
       run: |
         docker build -f django.Dockerfile -t quay.io/${{ env.QUAY_IO_USERNAME }}/pure_web_app:latest .
