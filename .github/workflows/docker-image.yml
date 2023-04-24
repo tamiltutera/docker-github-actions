@@ -2,9 +2,7 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "main","features/**" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: [ "main","features/**" ]  
 
 jobs:
 
@@ -33,7 +31,6 @@ jobs:
 #     - name: Start containers
 #       run: docker-compose -f "/code/docker-compose.yml" up -d --build
     - name: Login to Quay.io
-      if: github.event_name != 'pull_request'
       uses: docker/login-action@v1
       with:
         registry: quay.io
