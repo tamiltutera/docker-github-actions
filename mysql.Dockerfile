@@ -10,6 +10,9 @@ ENV MYSQL_DATABASE=$MYSQL_DATABASE
 ENV MYSQL_USER=$MYSQL_USER
 ENV MYSQL_PASSWORD=$MYSQL_PASSWORD
 ENV MYSQL_ALLOW_EMPTY_PASSOWRD=$MYSQL_ALLOW_EMPTY_PASSWORD
+
+RUN sudo apt-get -y update && \
+    sudo apt-get -y upgrade && 
 # Copy the custom configuration file
 COPY my_sql.cnf /etc/mysql/conf.d/
 
