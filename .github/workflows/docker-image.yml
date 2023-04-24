@@ -14,6 +14,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v1
+
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
     #- name: Build the Docker image
@@ -26,15 +30,44 @@ jobs:
         registry: quay.io
         username: ${{ secrets.QUAY_USERNAME }}
         password: ${{ secrets.QUAY_PASSWORD }}
-    - name: Build and push Docker images
-      run: |
-        docker-compose build
-        docker tag docker_mysql_app quay.io/${{ secrets.QUAY_ORG }}/${{ secrets.QUAY_REPO }}:latest
-        docker push quay.io/${{ secrets.QUAY_ORG }}/${{ secrets.QUAY_REPO }}:latest
+    - name: Login to Quay.io
+      uses: docker/login-action@v1
+      with:
+        registry: quay.io
+        username: ${{ secrets.QUAY_USERNAME }}
+        password: ${{ secrets.QUAY_PASSWORD }}
+   
 #     - name: Build and Push Docker image
 #       uses: docker/build-push-action@v2
 #       with:
 #         context: .
 #         file: ./docker-compose.yml
 #         push: true
-#         tags: quay.io/${{ secrets.QUAY_ORG }}/${{ secrets.QUAY_REPO }}:1.0
+#         tags: quay.io/${{ secrets.QUAY_ORG }}/${{ secrets.QUAY_REPO }}:latest
+    
+    - name: Build and push MySQL image
+      run: |
+        docker build -f mysql.Dockerfile -t quay.io/${{ env.QUAY_IO_USERNAME }}/pure_db:latest .
+        docker push quay.io/${{ secrets.QUAY_USERNAME }}/pure_db:latest
+    - name: Build and push Django image
+      run: |
+        docker build -f django.Dockerfile -t quay.io/${{ env.QUAY_IO_USERNAME }}/pure_web_app:latest .
+        docker push quay.io/${{ secrets.QUAY_USERNAME }}/pure_web_app:latest
+        
+#     - name: Build and Push Docker image
+#       uses: docker/build-push-action@v2
+#       with:
+#         context: .
+#         file: ./mysql.Dockerfile
+#         push: true
+#         tags: quay.io/${{ secrets.QUAY_ORG }}/pure_db:latest
+        
+#     - name: Build and Push Docker image
+#       uses: docker/build-push-action@v2
+#       with:
+#         context: .
+#         file: ./django.Dockerfile
+#         push: true
+#         tags: quay.io/${{ secrets.QUAY_ORG }}/pure_web_app:latest
+
+
