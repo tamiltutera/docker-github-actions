@@ -69,7 +69,7 @@ for image_name, image_tag in image_tags.items():
         container = client.containers.run(
             image_tag,
             environment=env_vars,
-            name=port_bindings[image_name],
+            name=image_name,
             ports=port_bindings[image_name],
             detach=True
         )
