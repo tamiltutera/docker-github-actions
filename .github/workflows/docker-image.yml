@@ -51,8 +51,8 @@ jobs:
         docker push quay.io/${{ secrets.QUAY_ORG }}/pure_db:latest
     - name: Build and push Django image
       run: |
-        docker build -f django.Dockerfile -t quay.io/${{ env.QUAY_IO_USERNAME }}/pure_web_app:latest .
-        docker push quay.io/${{ secrets.QUAY_USERNAME }}/pure_web_app:latest
+        docker build -f django.Dockerfile -t quay.io/${{ secrets.QUAY_ORG }}/pure_web_app:latest .
+        docker push quay.io/${{ secrets.QUAY_ORG }}/pure_web_app:latest
         
 #     - name: Build and Push Docker image
 #       uses: docker/build-push-action@v2
