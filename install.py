@@ -53,11 +53,6 @@ port_bindings = {
     'django_web_app': {8000:8005}  # no ports to bind for this image
 }
 
-# Pull images
-# for image_name, image_tag in image_tags.items():
-    
-#     client.images.pull(image_tag)
-# Pull images
 for image_name in args.images:
     image_tag = f'quay.io/tamiltutera/{image_name}:latest'
     client.images.pull(image_tag)
@@ -84,7 +79,7 @@ for image_name in args.images:
             detach=True
         )
     else:
-        print("ENV not set")
+        
         container = client.containers.run(
             image_tag,
             name=image_name,
