@@ -79,5 +79,3 @@ jobs:
 #         file: ./django.Dockerfile
 #         push: true
 #         tags: quay.io/${{ secrets.QUAY_ORG }}/pure_web_app:latest
-
-
