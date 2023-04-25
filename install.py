@@ -36,22 +36,6 @@ import argparse
 # Set up Docker client
 client = docker.from_env()
 
-# login_result = client.login(
-#     registry='quay.io',
-#     username='tamiltutera',
-#     password='Raj@31052022'
-# )
-
-# # Check if login was successful
-# if 'Status' in login_result and login_result['Status'] == 'Login Succeeded':
-#     print('Quay.io login successful')
-#     if client.ping():
-#         print('Docker daemon is responsive')
-#     else:
-#         print('Docker daemon is not responsive')
-# else:
-#     print('Quay.io login failed')
-
 # Define image names and tags
 # image_tags = {
 #     'pure_db': 'quay.io/tamiltutera/django_mysql:latest',
