@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Add SSH key
+      authorized_key:
+        user: "{{ ansible_user }}"
+        key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+    - name: display sample output
+      debug:
+        msg: "Hello World"
