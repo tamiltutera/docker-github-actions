@@ -11,6 +11,9 @@ WORKDIR /code
 
 COPY requirements.txt requirements.txt
 
+RUN apt-get -y update && \
+    apt-get -y upgrade 
+
 # INSTALLING THE PYTHON PACKAGES
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
@@ -25,12 +28,12 @@ EXPOSE 8001
 
 CMD ["python","manage.py","runserver","0.0.0.0:8000"]
 
-FROM mysql:latest
+# FROM mysql:latest
 
-ENV DB_HOST=$DB_HOST \
-      MYSQL_DATABASE=$MYSQL_DATABASE \
-      MYSQL_USER=$MYSQL_USER \
-      MYSQL_PASSWORD=$MYSQL_PASSWORD \
-      MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
- COPY my_sql.cnf /etc/mysql/conf.d/my_sql.cnf
+# ENV DB_HOST=$DB_HOST \
+#       MYSQL_DATABASE=$MYSQL_DATABASE \
+#       MYSQL_USER=$MYSQL_USER \
+#       MYSQL_PASSWORD=$MYSQL_PASSWORD \
+#       MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+#  COPY my_sql.cnf /etc/mysql/conf.d/my_sql.cnf
  
